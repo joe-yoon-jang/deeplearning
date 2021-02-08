@@ -17,8 +17,7 @@ title: Deep Learning
 email: goodhorror@naver.com
 description: >- # this means to ignore newlines until "baseurl:"
   Deep Learning 스터디 중(21.02.08).
-twitter_username: joe0610
-github_username: joe0610
+github_username: joe-yoon-jang
 minimal_mistakes_skin: default
 search: true
 
@@ -60,30 +59,21 @@ author:
   avatar : "/assets/images/bio-photo.jpg"
   bio    : "My Study."
   links:
-    - label: "Website"
-      icon: "fas fa-fw fa-link"
-      url: "https://"
-    - label: "Twitter"
-      icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/"
+      url: "https://github.com/joe-yoon-jang"
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
-      url: "https://instagram.com/"
+      url: "https://www.instagram.com/joyunjang/"
 
 footer:
   links:
-    - label: "Twitter"
-      icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/"
+      url: "https://github.com/joe-yoon-jang"
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
-      url: "https://instagram.com/"
+      url: "https://www.instagram.com/joyunjang/"
 
 defaults:
   # _posts
