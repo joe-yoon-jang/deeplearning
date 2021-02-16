@@ -13,6 +13,7 @@ tags:
 
 ## 파이썬이란
 > 유명 딥러닝 프레임워크 카페, 텐서플로 체이너 테아노 등
+
 > 책은 아나콘다로 https://anaconda.com/distribution
 
 ## 넘파이
