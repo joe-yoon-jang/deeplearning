@@ -107,7 +107,7 @@ sigmoid(x)
 
 #### 시그모이드 계단 함수 차이
 
-![](https://lh3.googleusercontent.com/proxy/y4AN3d14-KAmFcb_i3VjPA9EcSH7N1BHcycqnN5P8sNYIzO1B-77tKikiiUVSqHon10yd0mGEf1RwusYYteb_RbYA7gv_35nYRBoBt90YsAceSIsEZbc1_luhWAosClwB8c-KHAMoJkprcvInH1upTukZk-gcvyyNpXo8q2XEsP2fEHyg4q77psHnHWviho23_xdifTurMVyj1ZcBL-pJhnMkyUKYX1yxvr3V6rxGdT3ZfEtaPPS-EngHI8MK1OWTxVhNkSmFmO17b81p6uhH4IuoYd71tK3rWCxeRd4vTc)
+![](https://sean-parkk.github.io/assets/images/DLscratch/3/Untitled%206.png)
 
 - 가장 큰 차이는 매끄러움
 - 공통점
@@ -148,4 +148,236 @@ A.shape
 # (4,)
 A.shape[0]
 # 4
+
+B = np.array([[1,2],[3,4],[5,6]])
+print(B) # [[1 2] [3 4] [5 6]]
+np.ndim(B) # 2
+B.shape # (3,2)
 ```
+```
+1 2
+3 4
+5 6
+```
+
+- 3x2 배열로 처음 차원에 원소가3개
+- 2차원 배열은 특히 행렬
+  - 가로는 행, 세로는 열
+
+### 행렬의 곱
+
+**A**
+
+|1|2|
+|---|---|
+|3|4| 
+
+**B**
+|5|6|
+|---|---|
+|7|8|
+
+- 위 두 행렬의 A,B 곱  C는 아래와 같인 방법으로 계산
+  - 1 * 5 + 2 * 7 = 19
+  - 3 * 5 + 4 * 7 = 43
+
+**C**
+|19|22|
+|---|---|
+|43|50|
+
+```python
+A = np.array([[1,2], [3,4]])
+A.shape # (2, 2)
+B = np.array([[5,6], [7,8]])
+B.shape # (2,2)
+np.dot(A, B)
+# array([[19,22], [43, 50]])
+```
+- np.dot 은1차원 배열이면 벡터, 2차원 배열이면 행렬곱 계산
+- 두 행렬의 곱은 두 행렬의 대응 하는 차원의 원소 수를 일치 시켜야함
+  - (3열 * 2행)  (2열 * 4행) = (3열 * 4행) 행렬 형태로 나옴
+    - 3, 4로 결과의 모습
+    - 2, 2가 동일해야 계산이 가능(다르면 계산 불가)
+      - 행렬과 1차원 배열 계산도 가능 (3열 * 2행) (2열) = (3열)
+
+```python
+A = np.array([[1, 2], [3, 4], [5, 6]])
+A.shape # (3, 2)
+B = np.array([7, 8])
+B.shape # (2,)
+np.dot(A, B)
+# array([[23, 53, 83]])
+```
+
+### 신경망 행렬 곱
+
+|1|3|4|
+|--|--|--|
+|2|4|6|
+```
+x1        (1,2) y1
+x2        (3,4) y2
+          (4,5) y3  
+```          
+- 편향과 활성화 함수를 생략하고 가중치만 표시
+```
+X      W   =  Y
+2    2 * 3    3
+-일치-   -일치-
+```
+- 위 구현에서도 X와 W의 대응하는 차원의 원소수가 같아야 함
+
+```python
+X = np.array([1, 2])
+X.shape # (2,)
+W = np.array([[1, 3, 5], [2, 4, 6]])
+#array[[1 3 5]
+#      [2 4 6]]
+W.shape # (2,3)
+Y = np.dot(X,W)
+# array([5, 11, 17])
+```
+
+### 3층 신경망 구현
+
+- 입력층은 2개, 1번층(은닉층) 3개 2번층(은닉층) 2개 출력층은 2개 뉴런
+
+W<sup>(1)</sup><sub>1 2</sub>
+- (1): 1층의 가중치
+- 1: 다음 층의 1번째 뉴런
+- 2: 앞 층의 2번째 뉴런
+- 1,2 반대로 쓰는 경우도 있으니 확인이 필요
+
+- a<sup>(1)</sup><sub>1</sub> = w<sup>(1)</sup><sub>1 1</sub>x<sub>1</sub> + w<sup>(1)</sup><sub>1 2</sub>x<sub>2</sub> + b<sup>(1)</sup><sub>1</sub>
+  - 위 식을 행렬 곱으로 간소화
+    - A<sup>(1)</sup> = WX<sup>(1)</sup> + B<sup>(1)</sup>
+      - 이 행렬은
+      - A<sup>(1)</sup> = (a<sup>(1)</sup><sub>1</sub> a<sup>(1)</sup><sub>2</sub> a<sup>(1)</sup><sub>3</sub>)
+      - X = (x<sub>1</sub> x<sub>2</sub>)
+      - B<sup>(1)</sup> = [[(w<sup>(1)</sup><sub>1 1</sub> w<sup>(1)</sup><sub>2 1</sub> w<sup>(1)</sup><sub>3 1</sub>)], [w<sup>(1)</sup><sub>1 2</sub> w<sup>(1)</sup><sub>2 2</sub> w<sup>(1)</sup><sub>3 2</sub>]]
+
+- 입력층에서 1층 신호 전달
+```python
+
+X = np.array([1.0, 0.5])
+W1 = np.array([[0.1, 0.3, 0.5], [0.2, 0.4, 0.6]])
+B1 = np.array([0.1, 0.2, 0.3])
+
+W1.shape # (2,3)
+X.shape # (2,)
+B1.shape # (3,)
+
+A1 = np.dot(X, W1) + B1
+# array([0.3, 0.7, 1.1])
+Z1 = sigmoid(A1)
+# array([0.57444252, 0.66818777, 0.75026011])
+```
+- 1층에서 2층으로 신호 전달
+``` python
+W2 = np.array([[0.1, 0.4], [0.2,0.5], [0.3,0.6]])
+B2 = np.array([0.1, 0.2])
+
+A2 = np.dot(Z1, W2) + B2
+# array([0.3, 0.7, 1.1])
+Z2 = sigmoid(A2)
+```
+- 2층에서 출력층으로 신호 전달
+
+``` python
+def identity_functionm(x):
+  return x
+
+W3 = np.array([[0.1, 0.3], [0.2, 0.4]])
+B3 = np.array([0.1, 0.2])
+
+A3 = np.dot(Z2, W3) + B3
+Y = identity_function(A3) # 혹은 Y = A3
+```
+
+## 출력층
+
+- 신경망은 분류와 회귀 모두에 사용가능
+- 어떤 문제냐에 따라 출력층에서 활성화 함수가 다르다
+- 회귀에는 항등 함수
+  - 입력데이터에서 수치를 예측하는 문제(사진 속 인물의 뭄무게 57.4kg 등을 예측)
+- 분류에는 소프트 맥스
+  - 분류 : 데이터가 어느 클래스에 속하느냐
+
+### 항등 소프트 맥스
+
+> 항등함수(identity function)은 입력을 그대로 출력
+
+![](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2F7o3ns%2FbtqvQDIyhq4%2FFYgVfbO6NaJrkc7y11f440%2Fimg.png)
+
+- exp(x) 는 e<sup>x</sup>를 뜻하는 지수 함수(e는 자연상수)
+- n은 출력층의 뉴런 수, y<sub>k</sub>는 그중 k번째 출력
+
+```python
+a = np.array([0.3, 2.9, 4.0])
+exp_a = np.exp(a) # 지수 함수
+#array([ 1.34985881, 18.17414537, 54.59815003])
+sum_exp_a = np.sum(exp_a) # 지수 함수의 합
+print(sum_exp_a)
+# 74.1221542101633
+
+y = exp_a / sum_exp_a
+# array([0.01821127, 0.24519181, 0.73659691])
+```
+```python
+def softmax(a):
+  exp_a = nmp.exp(a)
+  sum_exp_a = np.sum(exp_a)
+  y = exp_a / sum_exp_a
+  
+  return y
+```
+
+### 소프트 맥수 함수 구현 주의사항
+
+- 오버플로 문제 주의
+- e<sup>10</sup> 은 20000 e<sup>100</sup> 은 0만 40개가 넘고e<sup>1000</sup>은 inf등으로 돌아온다
+- 큰값의 나눗셈은 값이 불안해진다
+
+```python
+a = np.array([1010, 1000, 990]) # 소프트맥스 함수의 계산
+np.exp(a) / np.sum(np.exp(a)) # 제대로 계산되지 않음
+# array([nan, nan, nan]) 
+c =  np.max(a)
+a- c
+# array([0, -10, -20])
+np.exp(a-c) / np.sum(np.exp(a-c))
+# array
+```
+```python
+def softmax(a):
+  c = np.max(a)
+  exp_a = nmp.exp(a - c)
+  sum_exp_a = np.sum(exp_a)
+  y = exp_a / sum_exp_a
+  
+  return y
+```
+
+### 소프트맥스 특징
+- 출력은 0 ~ 1 사이의 실수
+- 출력의 총합은 1
+  - 확률로 해석 가능
+
+
+## 손글씨 숫자 인식
+
+- 이미 학습된 매개변수를 사용하여 학습과정 생략후 추론과정만 구현
+- 추론과정을 신경망의 순전파(forward propagation) 라고도 한다
+- 피클(pickle) 파이썬 기능으로 저장해둔 파일을 로드하여 실행 당시의 객체를 즉시 복원가능하다
+
+### 신경망 추론처리
+ - 입력층 뉴런은 784
+   - 28 * 28 이미지 크기
+ - 출력층 뉴런은 10
+   - 이미지는 0~9 까지 숫자를 나타내기 때문
+
+### 배치처리
+
+- X(100 * 784) W1(784 * 50) W2(50 * 100) W3(100 * 10) Y(100 * 10)
+  - 784 입력 이미지 100개를 동시에 처리 입력데이터를 묶음으로 처리하는것을 배치라고한다
