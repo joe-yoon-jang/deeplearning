@@ -12,13 +12,12 @@ tags:
 
 # 퍼셉트론
 
-> 고대 화석같은 알고리즘 
-
-> 신경망(딥러닝)의 기원이 되는 알고리즘
+- 고대 화석같은 알고리즘 
+- 신경망(딥러닝)의 기원이 되는 알고리즘
 
 ## 퍼셉트론이란
 
-![perse][https://raw.githubusercontent.com/haedal-with-knu/H-A.I/master/Lecture/Img/p_op.png]
+![](https://raw.githubusercontent.com/haedal-with-knu/H-A.I/master/Lecture/Img/p_op.png)
 
 x1, x2 입력신호에 가중치를 곱한다 w1x1, w2x2 이 총합이 정해진 한계를 넘어설 때만 1을 출력한다(뉴런이 활성화한다라고 표현하기도 함). 이 한계를 임계값이라고 하며 θ(세타)로 나타낸다
 
@@ -58,11 +57,10 @@ def AND(x1, x2):
 
 ### 가중치와 편향
 
-[perse2][https://raw.githubusercontent.com/haedal-with-knu/H-A.I/master/Lecture/Img/p_op.png]
+![2](https://raw.githubusercontent.com/haedal-with-knu/H-A.I/master/Lecture/Img/p_op.png)
 
-- 위 식에 편향b를 추가
+- 위 식에 편향 b를 추가
 - b + w1x1 + w2x2
-
 
 
 ```python

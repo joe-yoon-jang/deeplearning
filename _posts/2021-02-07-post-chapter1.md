@@ -12,16 +12,15 @@ tags:
 # 헬로 파이썬
 
 ## 파이썬이란
-> 유명 딥러닝 프레임워크 카페, 텐서플로 체이너 테아노 등
-
-> 책은 아나콘다로 https://anaconda.com/distribution
+- 유명 딥러닝 프레임워크 카페, 텐서플로 체이너 테아노 등
+- 책은 아나콘다로 https://anaconda.com/distribution
 
 ## 넘파이
 
 딥러닝 구현 시 배열이나 행렬 계산등 메서드 제공
-
-> import numpy as np
-
+```py
+import numpy as np
+```
 - element-wise 원소별
 - element-wise product 원소별 곱셈
 
