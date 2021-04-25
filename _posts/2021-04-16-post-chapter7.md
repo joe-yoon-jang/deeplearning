@@ -118,3 +118,10 @@ Adversarial model은 genertaor의 파라미터가 샘플 데이터에 의해 직
 → cGAN(Conditional GAN)을 이용하여 문제 개선
 66. Helvetica scenario를 피하기 위해 G는 D가 업데이트 하기 전에 학습을 너무 많이 하며 안 됨
 Helvetica scenario : generator가 서로 다른 z들을 하나의 output point로 매핑할 때 발생하는 문제
+
+
+[참조1]http://jaejunyoo.blogspot.com/2017/01/generative-adversarial-nets-2.html
+
+[참조2]https://www.slideshare.net/NaverEngineering/1-gangenerative-adversarial-network
+
+[참조3]https://tobigs.gitbook.io/tobigs/deep-learning/computer-vision/gan-generative-adversarial-network
