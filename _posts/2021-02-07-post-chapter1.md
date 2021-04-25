@@ -18,6 +18,7 @@ tags:
 ## 넘파이
 
 딥러닝 구현 시 배열이나 행렬 계산등 메서드 제공
+
 ```py
 import numpy as np
 ```
