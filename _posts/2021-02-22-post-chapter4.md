@@ -164,6 +164,7 @@ def function_2(x):
 ```
 
 1. x<sub>0</sub> = 3 x<sub>1</sub> = 4 일때 x<sub>0</sub> 편미분   ∂f/∂x<sub>0</sub> 를 구하라
+
 ```python
 def function_tmp1(x0):
   return x0*x0 + 4.0**2.0
