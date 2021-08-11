@@ -169,7 +169,7 @@ class Relu:
 
   def backward(self, dout):
     dout[self.mask] = 0
-    dx = douit
+    dx = dout
     return dx
 
 x = np.array([[1.0, -0.5], [-2.0, 3.0]])
