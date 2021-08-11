@@ -149,7 +149,22 @@ generator.summary()
 - conv 
   - https://lsjsj92.tistory.com/416
   - https://zzsza.github.io/data/2018/02/23/introduction-convolution/
-
+- Conv2DTranspose
+  - 인자 
+    - filters:	정수, 출력 공간의 차원 (예 : 컨볼 루션의 출력 필터 수).
+    - kernel_size:	2D 컨볼 루션 창의 높이와 너비를 지정하는 정수 또는 2 개 정수의 튜플 / 목록 모든 공간 차원에 대해 동일한 값을 지정하는 단일 정수일 수 있다.
+    - strides:	높이와 너비를 따라 회선의 보폭을 지정하는 정수 또는 2 개 정수의 튜플 / 목록. 모든 공간 차원에 대해 동일한 값을 지정하는 단일 정수일 수 있다. stride 값! = 1을 지정은 dilation_rate 값! = 1 을 지정하는 것과 호환되지 않는다
+    - padding	one of "valid" or "same" (case-insensitive)
+    - output_padding:	출력 텐서의 높이와 너비를 따라 패딩의 양을 지정하는 정수 또는 2 개 정수의 튜플 / 목록.
+```python
+  Conv2DTranspose(
+    filters, kernel_size, strides=(1, 1), padding='valid', output_padding=None,
+    data_format=None, dilation_rate=(1, 1), activation=None, use_bias=True,
+    kernel_initializer='glorot_uniform', bias_initializer='zeros',
+    kernel_regularizer=None, bias_regularizer=None, activity_regularizer=None,
+    kernel_constraint=None, bias_constraint=None, **kwargs
+)
+```
 ```python
 def create_discriminator():
     discriminator = Sequential()
@@ -178,6 +193,25 @@ def create_discriminator():
 
 discriminator = create_discriminator()
 discriminator.summary()
+```
+## discriminator 설명
+
+- Conv2D: 필터로 특징을 뽑아주는 컨볼루션(Convolution) 레이어
+  - 인자
+    - 첫번째 인자 : 컨볼루션 필터의 수
+    - 두번째 인자 : 컨볼루션 커널의 (행, 열)
+    - padding : 경계 처리 방법을 정의합니다
+    - valid : 유효한 영역만 출력. 따라서 출력 이미지 사이즈는 입력 사이즈보다 작다
+    - same : 출력 이미지 사이즈가 입력 이미지 사이즈와 동일하다
+    - input_shape : 샘플 수를 제외한 입력 형태를 정의. 모델에서 첫 레이어일 때만 정의한다 (행, 열, 채널 수)로 정의합니다. 흑백영상인 경우에는 채널이 1이고, 컬러(RGB)영상인 경우에는 채널을 3으로 설정합니다.
+    - activation : 활성화 함수
+      - linear : 디폴트 값, 입력뉴런과 가중치로 계산된 결과값이 그대로 출력
+      - relu : rectifier 함수, 은익층에 주로 사용
+      - sigmoid : 시그모이드 함수, 이진 분류 문제에서 출력층에 주로 사용
+      - softmax : 소프트맥스 함수, 다중 클래스 분류 문제에서 출력층에 주로 사용
+
+```python
+Conv2D(32, (5, 5), padding='valid', input_shape=(28, 28, 1), activation='relu')
 ```
 ```python
 def create_gan(generator, discriminator):

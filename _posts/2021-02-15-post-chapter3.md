@@ -173,6 +173,7 @@ B.shape # (3,2)
 |3|4| 
 
 **B**
+
 |5|6|
 |---|---|
 |7|8|
@@ -182,6 +183,7 @@ B.shape # (3,2)
   - 3 * 5 + 4 * 7 = 43
 
 **C**
+
 |19|22|
 |---|---|
 |43|50|
@@ -215,6 +217,7 @@ np.dot(A, B)
 |1|3|4|
 |--|--|--|
 |2|4|6|
+
 ```
 x1        (1,2) y1
 x2        (3,4) y2
@@ -258,6 +261,7 @@ W<sup>(1)</sup><sub>1 2</sub>
       - B<sup>(1)</sup> = [[(w<sup>(1)</sup><sub>1 1</sub> w<sup>(1)</sup><sub>2 1</sub> w<sup>(1)</sup><sub>3 1</sub>)], [w<sup>(1)</sup><sub>1 2</sub> w<sup>(1)</sup><sub>2 2</sub> w<sup>(1)</sup><sub>3 2</sub>]]
 
 - 입력층에서 1층 신호 전달
+
 ```python
 
 X = np.array([1.0, 0.5])
@@ -273,7 +277,9 @@ A1 = np.dot(X, W1) + B1
 Z1 = sigmoid(A1)
 # array([0.57444252, 0.66818777, 0.75026011])
 ```
+
 - 1층에서 2층으로 신호 전달
+
 ``` python
 W2 = np.array([[0.1, 0.4], [0.2,0.5], [0.3,0.6]])
 B2 = np.array([0.1, 0.2])
@@ -282,6 +288,7 @@ A2 = np.dot(Z1, W2) + B2
 # array([0.3, 0.7, 1.1])
 Z2 = sigmoid(A2)
 ```
+
 - 2층에서 출력층으로 신호 전달
 
 ``` python
@@ -324,6 +331,7 @@ print(sum_exp_a)
 y = exp_a / sum_exp_a
 # array([0.01821127, 0.24519181, 0.73659691])
 ```
+
 ```python
 def softmax(a):
   exp_a = nmp.exp(a)
@@ -349,6 +357,7 @@ a- c
 np.exp(a-c) / np.sum(np.exp(a-c))
 # array
 ```
+
 ```python
 def softmax(a):
   c = np.max(a)
