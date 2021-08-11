@@ -163,8 +163,8 @@ class Momentum:
 - Xavier 초기값은 활성화 함수가 선형인 것을 전제한다.
 - sigmoid 함수와 tanh 함수는 좌우 대칭이라 중앙 부근이 선형인 함수로 볼 수 있어 위 초기값이 유효하다.
 - ReLU는 He 초기값을 사용한다.
-```py
 
+```py
 import numpy as np
 import matplotlib.pyplot as plt 
 
@@ -191,6 +191,7 @@ for i, a in activations.items():
   plt.hist(a.flatten(), 30, range=(0,1))
 plt.show()
 ```
+
 ![gradient vanishing](../../assets/images/220325.png)
 
 - 5개 층이 존재하고 각 층 뉴런은 100개
@@ -205,6 +206,7 @@ plt.show()
   #w = np.random.randn(node_num, node_num) * 1
   w = np.random.randn(node_num, node_num) * 0.01
 ```
+
 ![vygusfur](../../assets/images/220326.png)
 
 - 0.5 부근에 집중되었다
@@ -217,6 +219,7 @@ plt.show()
   #w = np.random.randn(node_num, node_num) * 0.01
   w = np.random.randn(node_num, node_num) / np.sqrt(node_num)
 ```
+
 ![xavier](../../assets/images/220327.png)
 
 - xavier: 논문에서 권장하는 가중치 초깃값
@@ -257,7 +260,7 @@ plt.show()
   - 훈련 데이터: 매개변수 학습
   - 검증 데이터: 하이퍼파라미터 성능 평가
   - 시험 데이터: 신경망의 범용 성능 평가
-  
+
 ### 하이퍼파라미터 최적화
 - 핵심은 하이퍼파라미터의 최적 값이 존재하는 범위를 조금씩 줄여간다.
 - 10<sup>-3</sup> ~ 10<sup>3</sup> 사이 값으로 지정 (로그 스케일)
