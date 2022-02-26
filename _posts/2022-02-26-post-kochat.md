@@ -1,3 +1,15 @@
+---
+title: "Kochat"
+last_modified_at: 2022-02-27T18:20:02-05:00
+categories:
+  - Study
+tags:
+  - Pythone
+  - Deep Learning
+  - 신경망학습
+  - chatbot
+---
+
 # [Kochat]
 
 - 한국어 전용 챗봇 프레임워크
