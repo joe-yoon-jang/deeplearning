@@ -172,24 +172,3 @@ Array.from(arrayLike); // [1,2,3]
 ## 35.3 객체 리터럴 내부에서 사용하는 경우
 
 - 스프레드 문법의 대상은 이터러블이어야 하지만 스프레드 푸로퍼티 제안은 일반 객체를 대상으로도 스프레드 문법의 사용을 허용한다
-
-```jsx
-//스프레드 프로퍼티 
-// 객체 봅사 (얕은)
-const obj = {x:1,y:2};
-const copy= {...obj};
-console.log(copy); // {x:1, y:2}
-obj === copy // false
-
-const merged = {x:1,y:2,...{a:3,b:4}}; // {x:1,y:2,a:3,b:4}
-
-// 스프레드 이전 객체 병합., 프로퍼티가 중복되는 경우 뒤에 위치한 프로퍼티가 우선권을 갖는다
-const merged = Object.assign({}, {x:1,y:2}, {y:10, z:3});
-console.log(merged); // {x:1,y:10,z:3}
-const changed =Object.assign({}, {x:1,y:2}, {y:100}); // {{x:1, y:100}
-const added =Object.assign({}, {x:1,y:2}, {z:3});  // {x:1,y:2,z:3}
-// 스프레드 객체 병합., 프로퍼티가 중복되는 경우 뒤에 위치한 프로퍼티가 우선권을 갖는다
-const merged = {...{x:1,y:2},...{y:10,z:3}}; // {x:1,y:10,z:3}
-const changed = {...{x:1,y:2}, ...{y:100}}; // {x:1,y:100}
-const added = {...{x:1,y:2},...{z:3}}; // {x:1,y:2,z:3}
-```
